@@ -1,7 +1,7 @@
 /**
  * Created by Arjun Sabharwal on 22/07/16 10:38 for Extentia Information Technology
  * Main Content : Alexa Skill for Smart Parking lot
- * Discription : Take a dweet.io Link and check status of the parking lot occupied or not
+ * Discription : Take a dweet.io Link and check status of the parking lot occupied or not and program addiotnal information questions.
  */
 
 
@@ -9,7 +9,7 @@ var slotStatus;
 /**
  * App ID for the skill
  */
-var APP_ID = "amzn1.ask.skill.cdd8439d-eaf6-4b44-80c8-a1b94913299f";
+var APP_ID = ""; // Removed to Preserve Privacy
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -94,7 +94,7 @@ smartyLot.prototype.intentHandlers = {
 function getData()
 {
     var newData = '';
-   http.get("http://www.dweet.io/get/dweets/for/parkinglot",function(res){
+   http.get("",function(res){ // Removed to prevent Privacy.
         console.log('Response Before Parsing',res);
         
         res.setEncoding('utf8');
@@ -111,23 +111,10 @@ function getData()
         {
             slotStatus = "false";
         } 
-       // return dataresult;
-    /*
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            console.log('output ',xhttp.responseText);
-            newData = JSON.parse(xhttp.responseText);
-        }
-    };
-    xhttp.open("GET", "http://dweet.io/get/dweets/for/parkinglot", false);
-    xhttp.send(); */
+    
+         });
     });
-    });
-   // console.log('newData ' + newData);
-
-   // return newData;
-}
+  }
 
 function getParkingStatus()
 {
@@ -157,3 +144,4 @@ exports.handler = function (event, context) {
     var instanceSmartyLot = new smartyLot();
     instanceSmartyLot.execute(event, context);
 };
+
